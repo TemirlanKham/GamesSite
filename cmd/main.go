@@ -21,6 +21,6 @@ func main() {
 	}
 
 	r := gin.Default()
-	routes.SetupGameRoutes(r, db)
+	routes.SetupGames(r, db)
 	r.Run(":8080")
 }

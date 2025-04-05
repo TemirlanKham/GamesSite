@@ -8,7 +8,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func SetupGameRoutes(r *gin.Engine, db *gorm.DB) {
+func SetupGames(r *gin.Engine, db *gorm.DB) {
 	gameRepo := repository.NewGameRepository(db)
 	gameService := services.NewGameService(gameRepo)
 	gameHandler := delivery.NewGameHandler(gameService)

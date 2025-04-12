@@ -80,3 +80,30 @@ cкелет будет выглядит примерно так
 "rating": 8.8
 }
 
+Добавил модель user, для регистрации пользователей.
+type User struct {
+ID       uint   `gorm:"primaryKey"`
+Username string `gorm:"unique;not null"`
+Password string `gorm:"not null"`
+}
+
+
+В auth -> handler.go добавляем функций регистраций, логина и Me.
+
+В auth -> jwt.go Генерируем токены для пользователя.
+
+В db подключаемся к PostgreSQL и автоматически применяем миграцию при запуске приложения.
+
+Аутентификация
+Регистрация: POST /api/auth/register
+Логин: POST /api/auth/login
+→ Возвращает JWT токен
+
+Получение информации о пользователе: GET /api/me (требуется токен)
+
+После логина получаем Токен  
+{
+"token": "eyJhbGciOiJIUzI1NiIs..."
+}
+
+В заголовке Authorization указываем Bearer token. и вставляем в поле токен.

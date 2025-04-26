@@ -5,6 +5,7 @@ import (
 	user "GamesSite/internal/models"
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
+	"log"
 	"net/http"
 )
 
@@ -30,7 +31,7 @@ func Login(c *gin.Context) {
 		return
 	}
 
-	token, _ := GenerateJWT(u.ID)
+	token, _ := GenerateJWT(u.ID, u.Role)
 	c.JSON(http.StatusOK, gin.H{"token": token})
 }
 func Register(c *gin.Context) {
@@ -59,8 +60,10 @@ func Register(c *gin.Context) {
 	u := user.User{
 		Username: req.Username,
 		Password: string(hashedPassword),
+		Role:     "user",
 	}
 	if err := db.DB.Create(&u).Error; err != nil {
+		log.Printf("Database error: %v", err)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to create user"})
 		return
 	}

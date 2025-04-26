@@ -18,9 +18,10 @@ func SetupGames(r *gin.Engine, db *gorm.DB) {
 	{
 		games.GET("/", gameHandler.GetAllGames)
 		games.GET("/:id", gameHandler.GetGame)
-		games.POST("/", gameHandler.CreateGame)
-		games.PUT("/:id", gameHandler.UpdateGame)
-		games.DELETE("/:id", gameHandler.DeleteGame)
+
+		games.POST("/", middleware.RoleRequired("admin"), gameHandler.CreateGame)
+		games.PUT("/:id", middleware.RoleRequired("admin"), gameHandler.UpdateGame)
+		games.DELETE("/:id", middleware.RoleRequired("admin"), gameHandler.DeleteGame)
 	}
 
 	authRoutes := r.Group("api/auth")

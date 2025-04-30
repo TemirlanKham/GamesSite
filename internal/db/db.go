@@ -16,7 +16,7 @@ import (
 var DB *gorm.DB
 
 func InitDB() {
-	dbHost := "localhost"
+	dbHost := "host.docker.internal"
 	dbName := "gogamedb"
 	dbUser := "postgres"
 	dbPass := "monkey"

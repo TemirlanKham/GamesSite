@@ -36,7 +36,6 @@ func RoleRequired(requiredRoles ...string) gin.HandlerFunc {
 				return
 			}
 		}
-
 		c.AbortWithStatusJSON(http.StatusForbidden, gin.H{"error": " YOU ARE NOT ADMIN"})
 	}
 }

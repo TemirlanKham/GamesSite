@@ -1,0 +1,32 @@
+Script для сохранения токена
+let json = pm.response.json();
+pm.environment.set("token", json.token);
+
+после вбиваем в Bearer token: {{token}}
+
+в GET http://localhost:8080/api/games
+выйдет весь список игр
+
+в POST http://localhost:8080/api/games
+добавить игру
+Пример
+{
+    "name": "LAST OF US",
+    "description": "Adventure",
+    "rating": 9.2
+}
+
+в PUT http://localhost:8080/api/games/9 не забываем про id игры
+можем обновить игру
+добавить игру
+Пример
+{
+    "name": "LAST OF US",
+    "description": "Adventure, Horror",
+    "rating": 8.4
+}
+
+в DELETE http://localhost:8080/api/games/7
+и это игра удалиться.
+
+Все это будет работать, если человек будет Админом
